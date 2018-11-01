@@ -33,6 +33,6 @@ def fista(I, Phi, lambdav, max_iterations=150, display=False):
     x = x2
     t = t2
     if display == True:
-      print "L1 Objective " +  str(np.sum((I-Phi.dot(x2))**2) + lambdav*np.sum(np.abs(x2)))
+      print("L1 Objective " +  str(np.sum((I-Phi.dot(x2))**2) + lambdav*np.sum(np.abs(x2))))
 
   return x2

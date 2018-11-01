@@ -14,7 +14,7 @@ def sparsenet(patch_dim=64, neurons=128, lambdav=0.1, eta=6.0, num_trials=3000, 
   num_trials: Learning Iterations
   batch_size: Batch size per iteration
   border: Border when extracting image patches
-  Inference: 'lca' or 'fista'  
+  Inference: 'lca' or 'fista'
   """
   IMAGES = scipy.io.loadmat('./IMAGES.mat')
   IMAGES = IMAGES['IMAGES']
@@ -47,8 +47,8 @@ def sparsenet(patch_dim=64, neurons=128, lambdav=0.1, eta=6.0, num_trials=3000, 
     elif inference == 'fista':
       ahat = fista.fista(I, Phi, lambdav, max_iterations=50)
     else:
-      print "Invalid inference option"
-      return
+      print("Invalid inference option")
+      return()
 
     # Calculate Residual Error
     R = I-np.dot(Phi, ahat)
@@ -60,7 +60,7 @@ def sparsenet(patch_dim=64, neurons=128, lambdav=0.1, eta=6.0, num_trials=3000, 
 
     # Plot every 100 iterations
     if np.mod(t,100) == 0:
-      print "Iteration " + str(t)
+      print("Iteration " + str(t))
       side = np.sqrt(neurons)
       image = np.zeros((sz*side+side,sz*side+side))
       for i in range(side.astype(int)):
@@ -71,7 +71,7 @@ def sparsenet(patch_dim=64, neurons=128, lambdav=0.1, eta=6.0, num_trials=3000, 
 
       plt.imshow(image, cmap=cm.Greys_r, interpolation="nearest")
 
-  return Phi
+  return(Phi)
 
 def sparsify(I, Phi, lambdav, eta=0.1, num_iterations=125):
   """
@@ -101,7 +101,7 @@ def sparsify(I, Phi, lambdav, eta=0.1, num_iterations=125):
     l = 0.95 * l
     l[l < lambdav] = lambdav
 
-  return a
+  return(a)
 
 # g:  Hard threshold. L0 approximation
 def g(u,theta):
@@ -112,4 +112,4 @@ def g(u,theta):
   """
   a = u;
   a[np.abs(a) < theta] = 0
-  return a
+  return(a)
